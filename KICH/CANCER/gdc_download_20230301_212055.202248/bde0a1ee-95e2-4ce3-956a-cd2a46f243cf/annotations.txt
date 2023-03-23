@@ -1,0 +1,3 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+95367abd-6deb-5094-8ed2-c7f80c73fdbb	12123	case	452135f2-6de6-4593-a091-ddf6344ee431	Prior malignancy	Notification	2012-11-10T00:00:00	Approved	Prior malignancy prostate cancer treated with locoregional radiation. Prior malignancy oncocytoma R kidney. No systemic chemotherapy or radiation.
+e5344896-9d6e-5db2-9f4a-7e8128151dcc	12122	case	452135f2-6de6-4593-a091-ddf6344ee431	History of acceptable prior treatment related to a prior/other malignancy	Notification	2012-11-10T00:00:00	Approved	Prior malignancy prostate cancer treated with locoregional radiation. Prior malignancy oncocytoma R kidney. No systemic chemotherapy or radiation.

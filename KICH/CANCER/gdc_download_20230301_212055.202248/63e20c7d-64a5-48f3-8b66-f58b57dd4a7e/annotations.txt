@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+aa82c95d-2d4c-5d0f-add6-612863a68f4d	12125	case	739deed4-d1dc-458f-bd0f-1e24d2bfd305	Synchronous malignancy	Notification	2012-11-10T00:00:00	Approved	Pt with synchronous bilateral kidney cancer.

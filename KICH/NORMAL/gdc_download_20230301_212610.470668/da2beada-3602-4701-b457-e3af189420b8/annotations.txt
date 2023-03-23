@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+c251d23a-6413-53bc-ba2f-028b1bd4c546	12124	case	e0e38071-877f-4ebf-955f-483eb4865351	Prior malignancy	Notification	2012-11-10T00:00:00	Approved	Prior malignancy melanoma of the shoulder. No systemic chemotherapy or radiation.
