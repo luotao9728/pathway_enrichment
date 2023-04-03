@@ -2,6 +2,14 @@
 import pandas as pd
 import os, sys
 
+def merge_sample_sheet(filepath):
+    files = os.listdir(filepath)
+    df = pd.DataFrame()
+    for file in files:
+        df = pd.concat([df, pd.read_csv(filepath + '\\' + file, sep='\t')])
+    df.to_csv('merged_sample_sheet.tsv', sep='\t', index=False)
+    return df
+
 class data_cleanup():
     def __init__(self):
         # filename should be the same as the project ID (e.g. KICH)
@@ -36,4 +44,5 @@ class data_cleanup():
         return df
 
 if __name__ == "__main__":
+    sample_sheet = merge_sample_sheet('sample_sheet')
     data_cleanup()
