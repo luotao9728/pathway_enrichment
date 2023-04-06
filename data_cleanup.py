@@ -10,9 +10,6 @@ def merge_sample_sheet(filepath):
     df.to_csv('merged_sample_sheet.tsv', sep='\t', index=False)
     return df
 
-import pandas as pd
-import os, sys
-
 class data_cleanup():
     def __init__(self):
         # filename should be the same as the project ID (e.g. KICH)
@@ -62,9 +59,6 @@ class data_cleanup():
                 rename_dict[file_name] = match[0]
         df = df.rename(columns=rename_dict)
         return df
-
-if __name__ == "__main__":
-    data_cleanup()
 
 if __name__ == "__main__":
     sample_sheet = merge_sample_sheet('sample_sheet')
