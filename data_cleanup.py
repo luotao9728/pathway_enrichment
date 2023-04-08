@@ -13,8 +13,7 @@ def merge_sample_sheet(filepath):
 class data_cleanup():
     def __init__(self):
         # filename should be the same as the project ID (e.g. KICH)
-        # filename = sys.argv[0]
-        filename = 'KICH'
+        filename = sys.argv[1]
         file_list = self.get_dir_list(filename)
         df = self.combine_df(file_list)
         df = self.rename_col(df)
@@ -57,9 +56,11 @@ class data_cleanup():
             match = list(sample_sheet.loc[sample_sheet['File Name'] == file_name]['Sample ID'])
             if len(match) != 0:
                 rename_dict[file_name] = match[0]
+            else:
+                print('File Name:', file_name, 'does not exist!')
         df = df.rename(columns=rename_dict)
         return df
 
 if __name__ == "__main__":
-    sample_sheet = merge_sample_sheet('sample_sheet')
+    merge_sample_sheet('sample_sheet')
     data_cleanup()
