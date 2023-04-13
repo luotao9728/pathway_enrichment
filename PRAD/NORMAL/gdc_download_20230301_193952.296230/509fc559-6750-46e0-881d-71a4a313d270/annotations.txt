@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+a284f2eb-a148-52f9-a6c9-7f6fd1041e96	17243	sample	6a5e7727-4af9-461c-8144-f93e49fb5279	Pathology outside specification	Notification	2013-09-03T00:00:00	Approved	Normal tissue contains tumor

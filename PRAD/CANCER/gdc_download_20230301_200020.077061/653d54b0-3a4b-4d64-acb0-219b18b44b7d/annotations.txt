@@ -1,0 +1,2 @@
+id	submitter_id	entity_type	entity_id	category	classification	created_datetime	status	notes
+736d4fa2-6ba8-575e-a684-3aa202d3cf60	6157	aliquot	3476ee8f-8cbe-4c6e-a3f7-f53facfe585a	Item is noncanonical	Notification	2012-06-26T00:00:00	Approved	FFPE PRAD Pilot 1
