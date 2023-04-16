@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import os, sys
 import gseapy as gp
 
@@ -80,9 +81,9 @@ class ClusterDESeq():
 
     def merge_pathway(self):
         ## read pvalue
-        pvalue = pd.read_csv("pvalue.csv")
+        pvalue = pd.read_csv("pvalue.csv").fillna(1)
         ## read pathway
-        pathway = pd.read_csv(self.filename)
+        pathway = pd.read_csv(f"{self.db}.csv", header=0)
         pathway_gene = {}
         ## Create dict for pathway: [gene1,gene2]
         for index, row in pathway.iterrows():
@@ -90,21 +91,32 @@ class ClusterDESeq():
                 pathway_gene[row["Term"]] = row["Genes"].split(";")
             else:
                 pathway_gene[row["Term"]] += row["Genes"].split(";")
-        gene_pathway = {}
-        ## Switch dict to gene: [pathway, pathway]
-        for keys,values in pathway_gene.items():
-            for i in values:
-                if i not in gene_pathway.keys():
-                    gene_pathway[i]=[keys]
-                else:
-                    gene_pathway[i].append(keys)
-        ## dict to dataframe
-        gene_pathway_pd = pd.DataFrame.from_dict(gene_pathway, orient="index").reset_index()
-        # gene_pathway_pd.to_csv('gene_pathway.csv')
-        gene_pathway_pd = gene_pathway_pd.rename(columns={"index":"gene_id"})
-        ## merge pvalue and pathway on gene_id
-        pvalue_pathway = pd.merge(pvalue, gene_pathway_pd, how='left', on = "gene_id")
-        pvalue_pathway.to_csv(self.db + "_pathway.csv")
+        try:
+            del pathway_gene["Term"]
+        except:
+            pass
+
+        ## Cancer name
+        cancer_name = pvalue.columns.values.tolist()[1:]
+        cancer_pathway = {}
+
+        ## Calculate pvalue for each cancer per pathway
+        for key, v in pathway_gene.items():
+            cancer_pathway[key] = np.zeros(12)
+            for i in v:
+                try:
+                    log_new = -2 * np.log(pvalue[pvalue["gene_id"]==i].iloc[:,[1,2,3,4,5,6,7,8,9,10,11,12]].to_numpy()).ravel()
+                    log_new[log_new==np.inf] = 1
+                    cancer_pathway[key] += log_new
+                except:
+                    ## If gene_id appears multiple times in pvalue file
+                    log_new = -2 * np.log(pvalue[pvalue["gene_id"]==i].iloc[:,[1,2,3,4,5,6,7,8,9,10,11,12]].to_numpy())
+                    log_new[log_new==np.inf] = 1
+                    cancer_pathway[key] += np.sum(log_new, axis=0).ravel()
+
+        ## Save results
+        cancer_pathway_pd = pd.DataFrame.from_dict(cancer_pathway, orient='index')
+        cancer_pathway_pd.to_csv(f"{self.db}_pvalue_cancer.csv", header=cancer_name)
 
 if __name__ == "__main__":
     args = sys.argv
