@@ -19,32 +19,32 @@ class data_cleanup():
         df = self.rename_col(df)
         df.to_csv(filename + '.tsv', sep='\t', index=False)
 
-#     def get_dir_list(self, filename):
-#         file_list = []
-#         for file in ['NORMAL', 'CANCER']:
-#             new_filename1 = filename + '/' + file + '/' + os.listdir(filename + '/' + file)[0]
-#             dir = os.listdir(new_filename1)
-#             for i in range(len(dir)):
-#                 new_filename2 = new_filename1 + '/' + dir[i] + '/'
-#                 new_filename2 += os.listdir(new_filename2)[0]
-#                 if new_filename2[-3:] == 'tsv':
-#                     file_list.append(new_filename2)
-#         return file_list
+    def get_dir_list(self, filename):
+        file_list = []
+        for file in ['NORMAL', 'CANCER']:
+            new_filename1 = filename + '/' + file + '/' + os.listdir(filename + '/' + file)[0]
+            dir = os.listdir(new_filename1)
+            for i in range(len(dir)):
+                new_filename2 = new_filename1 + '/' + dir[i] + '/'
+                new_filename2 += os.listdir(new_filename2)[0]
+                if new_filename2[-3:] == 'tsv':
+                    file_list.append(new_filename2)
+        return file_list
 
-#     def read_file(self, file):
-#         df = pd.read_csv(file,
-#                          sep='\t',
-#                          skiprows=[0,2,3,4,5],
-#                          usecols=['gene_id', 'gene_name', 'unstranded'])
-#         file_name = file.split('/')[-1]
-#         df = df.rename(columns={'unstranded': file_name})
-#         return df
+    def read_file(self, file):
+        df = pd.read_csv(file,
+                         sep='\t',
+                         skiprows=[0,2,3,4,5],
+                         usecols=['gene_id', 'gene_name', 'unstranded'])
+        file_name = file.split('/')[-1]
+        df = df.rename(columns={'unstranded': file_name})
+        return df
 
-#     def combine_df(self, file_list):
-#         df = self.read_file(file_list[0])
-#         for dir in file_list[1:]:
-#             df = pd.merge(df, self.read_file(dir), on=['gene_id', 'gene_name'], how='left')
-#         return df
+    def combine_df(self, file_list):
+        df = self.read_file(file_list[0])
+        for dir in file_list[1:]:
+            df = pd.merge(df, self.read_file(dir), on=['gene_id', 'gene_name'], how='left')
+        return df
 
     def rename_col(self, df):
         sample_sheet = pd.read_csv('merged_sample_sheet.tsv',
