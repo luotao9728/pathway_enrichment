@@ -6,9 +6,8 @@
 ## General work flow:
 1. Data cleanup (use Python)
 2. Perform statistics analysis of different genes of different cancer types (DESeq2)
-3. Cluster genes based on statistical significance (from ~20,000 to ~4,000 clusters)
-4. Cluster of clusters based on statistical significance (from ~4,000 to ~46 clusters)
-5. Create Heat Map
+3. Cluster genes based on pathway (Enrichr)
+4. Create Heat Map
 
 ## Instruction:
 1. Download RNA-seq data in STAR format from TCGA database as well as their sample sheets.
